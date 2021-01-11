@@ -10,12 +10,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val data = listOf(1,2,3,null,4)
+        val data: List<Int?> = listOf<Int?>(1,2,3,null,4)
 
-        textView.text = data.processData().toString()
+        textView.text = processData(data).toString()
     }
 
-    fun List<Int?>.processData() = map { item ->
-        item?.let { it + 1 }
+    fun processData(data: List<Int?>): List<Int?> {
+        val result: MutableList<Int?> = mutableListOf<Int?>()
+        for (item in data) {
+            if (item == null) result.add(item)
+            else result.add(item+1)
+        }
+
+        return result
     }
 }
